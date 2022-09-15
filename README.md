@@ -50,7 +50,7 @@ Virtual Schema:
     // DEL: /api/thoughts/:thoughtId/reactions/:reactionId
 
 ### Demo
-https://gentle-lake-33039.herokuapp.com/ 
+https://youtu.be/1yee-2vcTyE 
 
 ## Questions
 [jcgcristel's GitHub](https://github.com/jcgcristel)

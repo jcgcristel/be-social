@@ -72,7 +72,7 @@ const thoughtController = {
                 if (!updatedUser) {
                     return res.status(404).json({ message: 'Failed to remove thought from user.' });
                 }
-                res.json(updatedUser)
+                res.json(updatedUser);
             })
             .catch(e => res.status(404).json(e));
     },
