@@ -86,3 +86,5 @@ const UserController = {
             .catch(err => res.status(400).json(err));
     },
 }
+
+module.exports = UserController;
