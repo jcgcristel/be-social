@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/PizzaHunt', {
+    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/BeSocial', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
