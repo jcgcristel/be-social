@@ -1,6 +1,6 @@
 const { User } = require('../models');
 
-const UserController = {
+const userController = {
     // Get all users
     getAllUsers(req, res) {
         User.find({})
@@ -87,4 +87,4 @@ const UserController = {
     },
 }
 
-module.exports = UserController;
+module.exports = userController;

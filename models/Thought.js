@@ -1,4 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
+const thoughtController = require('../controller/thought-controller');
 
 const ReactionSchema = new Schema({
         reactionId: {
@@ -52,3 +53,7 @@ const ThoughtSchema = new Schema({
         }
     }
 )
+
+const Thought = model('Thought', ThoughtSchema);
+
+module.exports = Thought;
