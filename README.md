@@ -1,6 +1,6 @@
 # be-social
 
-An API using Mongoose where users can create and react to thoughts as well have friends.
+An API using Mongoose where users can create and react to thoughts as well as add friends.
 
 ## Table of Contents
 - [Installation](#installation)
