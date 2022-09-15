@@ -1,5 +1,4 @@
 const { Schema, model, Types } = require('mongoose');
-const thoughtController = require('../controller/thought-controller');
 
 const ReactionSchema = new Schema({
         reactionId: {
