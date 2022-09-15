@@ -1,6 +1,7 @@
 const express = require('express');
 
 const mongoose = require('mongoose');
+const { db } = require('./models/Thought');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,6 +14,8 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+
+// mongoose.connection.dropDatabase();
 
 mongoose.set('debug', true);
 

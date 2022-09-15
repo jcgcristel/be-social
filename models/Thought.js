@@ -41,7 +41,8 @@ const ThoughtSchema = new Schema({
             get: createdAtVal => dateFormat(createdAtVal)
         },
         username: {
-            type: String, ref: 'User.username'
+            type: String,
+            required: true
         },
         reactions: [ReactionSchema]
     },
@@ -49,7 +50,8 @@ const ThoughtSchema = new Schema({
         toJSON: {
             virtuals: true,
             getter: true
-        }
+        },
+        id: false
     }
 )
 
