@@ -95,7 +95,7 @@ const userController = {
         User.findOneAndUpdate(
             { _id: params.userId },
             { $pull: { friends: params.friendId }},
-            { new: true, runValidators: true })
+            { new: true })
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'User not found.'});
