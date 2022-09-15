@@ -56,8 +56,9 @@ const thoughtController = {
 
     // delete thought
     deleteThought({ params }, res) {
-        Thought.findOne({ _id: params.id })
+        Thought.findOneAndDelete({ _id: params.id })
             .then(deletedThought => {
+                console.log(deletedThought);
                 if (!deletedThought) {
                     return res.status(404).json({ message: 'Thought not found.' });
                 }
@@ -67,12 +68,11 @@ const thoughtController = {
                     { new: true }
                 )
             })
-            .then(dbThoughtData => {
-                if (!dbThoughtData) {
-                    res.status(404).json({ message: 'Thought not found.'})
-                    return;
+            .then(updatedUser => {
+                if (!updatedUser) {
+                    return res.status(404).json({ message: 'Failed to remove thought from user.' });
                 }
-                res.json(dbThoughtData);
+                res.json(updatedUser)
             })
             .catch(e => res.status(404).json(e));
     },

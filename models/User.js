@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const Thought  = require('./Thought');
 
 const validateEmail = function(email) {
-    var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+    var regex = /^([A-z0-9_\.-]+)@([\dA-z\.-]+)\.([A-z\.]{2,6})$/;
     return regex.test(email);
 }
 
@@ -42,7 +42,7 @@ UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 })
 
-// Delete dependant thoughts
+// Delete dependant thoughts and friends
 UserSchema.pre('findOneAndDelete', function(next) {
     User.findById(this.getFilter()["_id"])
     .then(userData => {
@@ -50,9 +50,17 @@ UserSchema.pre('findOneAndDelete', function(next) {
             console.log('User not found');
             return;
         }
-        return Thought.deleteMany({ username: userData.username }).exec();
+        Thought.deleteMany({ username: userData.username }).exec();
+        return userData;
     })
-    .then(() => {next()})
+    // Removes from friends list of users <--- daz big algo :(
+    .then(() => {
+        User.updateMany({},
+            { $pull: { friends: this.getFilter()["_id"] } },
+            { multi: true },
+        ).exec();
+    })
+    .then(() => next())
     .catch(e => console.log(e));
 });
 
