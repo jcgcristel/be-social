@@ -55,7 +55,7 @@ const userController = {
             { new: true, runValidators: true })
             .then (dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id.'});
+                    res.status(404).json({ message: 'User not found.'});
                     return;
                 }
                 res.json(dbUserData);
@@ -68,23 +68,45 @@ const userController = {
         User.findOneAndDelete({ _id: params.id })
             .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id.' });
+                res.status(404).json({ message: 'User not found.' });
                 return;
             }
             res.json(dbUserData);
             })
-            .catch(err => res.status(400).json(err));
+            .catch(e => res.status(400).json(e));
     },
 
-    // Add a friend's id to a user by id
+    // Add a friend's id to a user
     addFriend({ params, body }, res) {
         User.findOneAndUpdate(
-            { _id: params.id },
-            body,
+            { _id: params.userId },
+            { $push: { friends: _id }},
+            { new: true },
             { runValidators: true })
-            .then(dbUserData => res.json(dbUserData))
-            .catch(err => res.status(400).json(err));
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'User not found.'})
+                }
+                res.json(dbUserData);
+            })
+            .catch(e => res.status(400).json(e));
     },
+
+    // Remove a friend's id from a user
+    removeFriend({ params }, res) {
+        User.findOneAndUpdate(
+            { _id: params.userId },
+            { $pull: { friends: params.friendId }},
+            { new: true },
+            { runValidators: true })
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'User not found.'})
+                }
+                res.json(dbUserData);
+            })
+            .catch(e => res.status(400).json(e));
+    }
 }
 
 module.exports = userController;
