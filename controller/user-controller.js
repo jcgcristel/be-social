@@ -74,5 +74,15 @@ const UserController = {
             res.json(dbUserData);
             })
             .catch(err => res.status(400).json(err));
-        }
+    },
+
+    // Add a friend's id to a user by id
+    addFriend({ params, body }, res) {
+        User.findOneAndUpdate(
+            { _id: params.id },
+            body,
+            { runValidators: true })
+            .then(dbUserData => res.json(dbUserData))
+            .catch(err => res.status(400).json(err));
+    },
 }
